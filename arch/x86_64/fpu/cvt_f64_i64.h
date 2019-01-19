@@ -14,7 +14,7 @@ static inline void fpu_cvt_f64_i64(const uint64_t *fs, uint64_t *fd) {
   __m128d fd_reg;
 
   fd_reg = _mm_setzero_pd();
-  fd_reg = _mm_cvtsi64_sd(fd_reg, *fs);
+  fd_reg = _mm_cvtsi32_sd(fd_reg, *fs);
   fd_double = _mm_cvtsd_f64(fd_reg);
 
   // Prevent aliasing.

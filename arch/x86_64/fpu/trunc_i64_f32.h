@@ -17,6 +17,6 @@ static inline void fpu_trunc_i64_f32(const uint32_t *fs, uint64_t *fd) {
   memcpy(&fs_float, fs, sizeof(fs_float));
 
   fs_reg = _mm_set_ss(fs_float);
-  *fd = _mm_cvttss_si64(fs_reg);
+  *fd = _mm_cvttss_si32(fs_reg);
 }
 

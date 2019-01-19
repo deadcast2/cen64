@@ -34,7 +34,7 @@ if (${CMAKE_C_COMPILER_ID} MATCHES GNU)
   string(REGEX MATCH "([a-zA-Z0-9])+" GCC_MACHINE ${GCC_MACHINE})
 
   if (${GCC_MACHINE} MATCHES "x86.*" OR ${GCC_MACHINE} MATCHES "i.86.*")
-    set(CEN64_ARCH_SUPPORT "Native" CACHE STRING "Architectural extension(s) to use")
+    set(CEN64_ARCH_SUPPORT "x86" CACHE STRING "Architectural extension(s) to use")
     set_property(CACHE CEN64_ARCH_SUPPORT PROPERTY STRINGS Native AVX SSE4.1 SSSE3 SSE3 SSE2)
 
     if (${CEN64_ARCH_SUPPORT} MATCHES "SSE2")
@@ -49,6 +49,8 @@ if (${CMAKE_C_COMPILER_ID} MATCHES GNU)
       set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mavx")
     elseif (${CEN64_ARCH_SUPPORT} MATCHES "Native")
       set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=native")
+    elseif (${CEN64_ARCH_SUPPORT} MATCHES "x86")
+      set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=i686 -msse2")
     endif ()
 
 #    if (${GCC_MACHINE} MATCHES "i.86.*" OR ${GCC_MACHINE} MATCHES "x86.*")
