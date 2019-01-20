@@ -18,6 +18,5 @@ static inline void fpu_floor_i64_f32(const uint32_t *fs, uint64_t *fd) {
 
   fs_reg = _mm_set_ss(fs_float);
   fs_reg = _mm_floor_ss(fs_reg, fs_reg);
-  *fd = _mm_cvtss_si64(fs_reg);
+  *fd = _mm_cvtss_si32(fs_reg);
 }
-

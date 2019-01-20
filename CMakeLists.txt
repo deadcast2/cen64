@@ -50,7 +50,7 @@ if (${CMAKE_C_COMPILER_ID} MATCHES GNU)
     elseif (${CEN64_ARCH_SUPPORT} MATCHES "Native")
       set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=native")
     elseif (${CEN64_ARCH_SUPPORT} MATCHES "x86")
-      set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=i686 -msse2")
+      set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=i686 -msse4")
     endif ()
 
 #    if (${GCC_MACHINE} MATCHES "i.86.*" OR ${GCC_MACHINE} MATCHES "x86.*")
@@ -113,7 +113,7 @@ if (${CMAKE_C_COMPILER_ID} MATCHES GNU)
   if (GCC_VERSION VERSION_GREATER 5.1 OR GCC_VERSION VERSION_EQUAL 5.1)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror=discarded-qualifiers")
   endif (GCC_VERSION VERSION_GREATER 5.1 OR GCC_VERSION VERSION_EQUAL 5.1)
-  
+
 endif (${CMAKE_C_COMPILER_ID} MATCHES GNU)
 
 # If using Clang, configure it accordingly.
@@ -454,4 +454,3 @@ target_link_libraries(cen64
   ${X11_X11_LIB}
   ${CMAKE_THREAD_LIBS_INIT}
 )
-
