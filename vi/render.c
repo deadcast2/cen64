@@ -41,9 +41,6 @@ void gl_window_init(struct vi_controller *vi) {
   vi->quad[3] = vi->quad[4] = 1;
   vi->viuv[2] = vi->viuv[4] =
   vi->viuv[5] = vi->viuv[7] = 1;
-
-  // Tell OpenGL that the byte order is swapped.
-  glPixelStorei(GL_UNPACK_SWAP_BYTES, GL_TRUE);
 }
 
 // Renders a frame.
@@ -70,7 +67,7 @@ void gl_window_render_frame(struct vi_controller *vi, const uint8_t *buffer,
       break;
   }
 
-  // AA Mode 3 (Replicate Pixels & No Interpolation)
+  // AA Mode 3 (Replicate Pixels & No Interpolation)
   if ((vi->regs[VI_STATUS_REG] & 0x300) == 0x300) {
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -128,4 +125,3 @@ void gl_window_resize_cb(int width, int height) {
 
   glClear(GL_COLOR_BUFFER_BIT);
 }
-

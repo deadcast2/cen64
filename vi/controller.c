@@ -132,6 +132,14 @@ void vi_cycle(struct vi_controller *vi) {
       bus->ri->ram + (vi->regs[VI_ORIGIN_REG] & 0xFFFFFF),
       copy_size);
 
+    // Do a manual byte swap since a bug in opengl 2.1 driver.
+    uint8_t *frame_buffer = vi->window->frame_buffer;
+    for (size_t i = 0; i < copy_size; i += 2) {
+      uint16_t color = frame_buffer[i] | (frame_buffer[i + 1] << 8);
+      frame_buffer[i] = color >> 8;
+      frame_buffer[i + 1] = color;
+    }
+
     cen64_mutex_unlock(&vi->window->render_mutex);
     cen64_gl_window_push_frame(window);
   }
@@ -194,4 +202,3 @@ int write_vi_regs(void *opaque, uint32_t address, uint32_t word, uint32_t dqm) {
 
   return 0;
 }
-
