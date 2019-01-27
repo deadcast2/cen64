@@ -25,6 +25,7 @@
 #include "rsp/cpu.h"
 #include "thread.h"
 #include "vi/controller.h"
+#include "vi/window.h"
 #include "vr4300/cpu.h"
 #include "vr4300/cp1.h"
 #include <setjmp.h>
@@ -129,6 +130,7 @@ struct cen64_device *device_create(struct cen64_device *device,
 // Cleans up memory allocated for the device.
 void device_destroy(struct cen64_device *device) {
   rsp_destroy(&device->rsp);
+  vi_destroy_window(&device->vi);
 }
 
 // Called when we should (probably?) leave simulation.
@@ -316,4 +318,3 @@ int device_debug_spin(struct cen64_device *device) {
 
   return 0;
 }
-
